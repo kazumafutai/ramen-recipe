@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ラーメンレシピ検索結果</title>
+    <style>
+        body { font-family: "Hiragino Sans", "Meiryo", sans-serif; margin: 0; padding: 0; background: #fafafa; color: #333; }
+        header { background: #ff7043; color: white; padding: 20px; font-size: 26px; font-weight: bold; position: relative; text-align: center; }
+        .back-link { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: white; text-decoration: none; font-size: 16px; background: rgba(255,255,255,0.2); padding: 8px 14px; border-radius: 8px; }
+        .back-link:hover { background: rgba(255,255,255,0.35); }
+        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+        .search-title { font-size: 22px; margin-bottom: 20px; color: #444; border-left: 5px solid #ff7043; padding-left: 10px; }
+        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .menu-item { background: white; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; text-align: center; transition: 0.2s; }
+        .menu-item:hover { transform: translateY(-4px); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .menu-item img { width: 100%; height: 180px; object-fit: cover; }
+        .menu-item a { display: block; padding: 15px; font-size: 18px; color: #ff7043; text-decoration: none; font-weight: bold; }
+        .menu-item a:hover { text-decoration: underline; }
+        .no-result { text-align: center; font-size: 18px; color: #777; margin-top: 50px; }
+        @media (max-width: 700px) { .menu-grid { grid-template-columns: repeat(1, 1fr); } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a class="back-link" href="index.html">🏠 トップページへ戻る</a>
+    <div class="title">ラーメンレシピ検索</div>
+</header>
+
+<div class="container">
+    <div class="search-title" id="search-summary">検索結果を読み込んでいます...</div>
+    <div class="menu-grid" id="result-grid"></div>
+</div>
+
+<!-- generate.phpによって自動出力される最新のラーメンデータを読み込む -->
+<script src="search_data.js"></script>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get('q') ? params.get('q').trim() : "";
+
+    const summaryEl = document.getElementById("search-summary");
+    const gridEl = document.getElementById("result-grid");
+
+    if (!query) {
+        summaryEl.textContent = "検索キーワードが入力されていません。";
+    } else {
+        summaryEl.textContent = `「${query}」の検索結果`;
+
+        // キーワードに合致するレシピを絞り込む
+        const results = recipeSearchData.filter(recipe => {
+            return recipe.name.includes(query) || recipe.ingredients.includes(query);
+        });
+
+        if (results.length === 0) {
+            gridEl.innerHTML = '<div class="no-result" style="grid-column: 1/-1;">一致するラーメンレシピが見つかりませんでした。</div>';
+        } else {
+            results.forEach(recipe => {
+                const card = document.createElement("div");
+                card.className = "menu-item";
+                card.innerHTML = `
+                    <img src="${recipe.image}" alt="${recipe.name}" onerror="this.src='placeholder.jpg';">
+                    <a href="${recipe.link}">${recipe.name}</a>
+                `;
+                gridEl.appendChild(card);
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
