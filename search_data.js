@@ -1,1 +1,1 @@
-const recipeSearchData = [{"name":"鶏ガラなしでも大丈夫！「鶏白湯ラーメン」","link":"tori\/toripaitan.html","image":"tori\/img\/toripaitan.jpg","ingredients":"鶏もも肉, 昆布だしの素"}];
+const recipeSearchData = [{"name":"鶏ガラなしでも大丈夫！「鶏白湯ラーメン」","link":"recipes\/toripaitan.html","image":"recipes\/img\/toripaitan.jpg","ingredients":"鶏もも肉, 昆布だしの素"},{"name":"【スーパーの食材で完全再現】ブレンダーと「餅」で作る超濃厚こってりラーメン","link":"recipes\/tenichi.html","image":"recipes\/img\/tenichi.jpg","ingredients":"鶏もも肉, 豚バラブロック, 切り餅, 玉ねぎ, じゃがいも, 人参, にんにく, 生姜, 水, 醤油, みりん, 砂糖, 鶏がらスープの素, 昆布だしの素, 塩, 中華麺（中細ストレート）, チャーシュー, 青ネギ（刻み）, メンマ"}];
