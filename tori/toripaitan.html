@@ -3,145 +3,203 @@
 <head>
 <meta charset="UTF-8">
 <title>鶏ガラなしでも大丈夫！「鶏白湯ラーメン」</title>
-
-<!-- ★ここから追加（SEO＆SNS拡散用メタタグ） -->
+<!-- ★SEO＆SNS拡散用メタタグ -->
 <meta name="description" content="{{seo_desc}}">
 <meta property="og:title" content="鶏ガラなしでも大丈夫！「鶏白湯ラーメン」">
 <meta property="og:description" content="{{seo_desc}}">
 <meta property="og:image" content="img/toripaitan.jpg">
 <meta property="og:type" content="article">
-<!-- ★ここまで追加 -->
 
 <style>
 body {
-  font-family: "Yu Gothic", sans-serif;
+  font-family: "Hiragino Sans", "Meiryo", sans-serif;
   margin: 0;
-  background: #fafafa;
+  background: #fcf8f5;
   line-height: 1.8;
+  color: #333;
 }
 
-/* ヘッダー */
+/* ★トップページと統一した、漆黒和モダンのプレミアムヘッダー */
 header {
-  background: #ff7043;
-  color: white;
-  padding: 20px;
+  position: relative;
+  background: linear-gradient(135deg, #140502 0%, #300c05 50%, #140502 100%);
+  padding: 40px 20px;
   text-align: center;
-  font-size: 26px;
-  font-weight: bold;
-  position: relative; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  border-bottom: 4px solid #ff7043;
+}
+header::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    radial-gradient(rgba(255, 112, 67, 0.12) 1px, transparent 0),
+    radial-gradient(rgba(255, 112, 67, 0.08) 1px, transparent 0);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
+  opacity: 0.4;
+  z-index: 1;
+}
+.header-title {
+  position: relative;
+  z-index: 3;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 900;
+  margin: 0 0 15px 0;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 0 15px rgba(255, 112, 67, 0.4);
+}
+.back-link {
+  position: relative;
+  z-index: 3;
+  display: inline-block;
+  color: #ffe2d1;
+  text-decoration: none;
+  font-size: 14px;
+  border: 1px solid rgba(255, 112, 67, 0.5);
+  padding: 8px 20px;
+  border-radius: 30px;
+  background: rgba(0,0,0,0.3);
+  transition: 0.2s;
+}
+.back-link:hover {
+  background: rgba(255, 112, 67, 0.3);
+  color: white;
 }
 
-/* メインコンテンツ */
 .container {
   max-width: 900px;
-  margin: 30px auto;
+  margin: 40px auto;
   padding: 0 20px;
 }
 
-/* 写真カード */
+/* ★AI生成の極上写真を大迫力で見せる写真カード */
 .photo-card {
   background: white;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-  margin-bottom: 30px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  margin-bottom: 40px;
+  border: 2px solid #ffe2d1;
 }
-
 .photo-card img {
   width: 100%;
-  height: 300px;
+  height: 450px; /* シズル感を爆発させるために高さを大幅に拡大 */
   object-fit: cover;
 }
-
 .photo-card .caption {
-  padding: 15px;
-  font-size: 18px;
-  color: #555;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #5d4037;
   text-align: center;
+  background: #fffbf9;
 }
 
-/* レシピカード */
+/* レシピカード全体 */
 .recipe-card {
   background: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  padding: 35px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
   margin-bottom: 40px;
 }
-
 .recipe-card h2 {
   margin-top: 0;
   border-left: 6px solid #ff7043;
-  padding-left: 10px;
+  padding-left: 15px;
   font-size: 24px;
+  color: #2c1a16;
 }
 
-.recipe-card h3 {
-  margin-top: 25px;
-  font-size: 20px;
-  color: #444;
-}
-
-/* 材料カード（横並び） */
+/* 材料ブロック */
 .ingredients-wrapper {
   display: flex;
-  gap: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
   margin-top: 20px;
+  margin-bottom: 40px;
 }
-
 .ingredients-block {
-  background: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  width: 250px;
+  background: #fffaf7;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #ffe2d1;
+  flex: 1;
+  min-width: 250px;
 }
-
 .ingredients-title {
   font-weight: bold;
   font-size: 18px;
-  margin-bottom: 10px;
-  color: #ff7043;
+  margin-bottom: 15px;
+  color: #d32f2f;
   border-bottom: 2px solid #ff7043;
-  padding-bottom: 4px;
+  padding-bottom: 8px;
+}
+.ingredients-block ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ingredients-block li {
+  padding: 10px 0;
+  border-bottom: 1px dashed #ffcca8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-ul {
-  margin-top: 10px;
-  padding-left: 20px;
+/* ★最強のキャッシュポイント「アフィリエイト購入ボタン」 */
+.shop-link {
+  display: inline-block;
+  background: linear-gradient(180deg, #ff9900, #ff7b00); /* Amazonや楽天を想起させる購買欲直結オレンジ */
+  color: white !important;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 6px 14px;
+  border-radius: 6px;
+  box-shadow: 0 3px 8px rgba(255, 123, 0, 0.3);
+  transition: 0.2s;
+  white-space: nowrap;
+}
+.shop-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 123, 0, 0.4);
+  background: linear-gradient(180deg, #ffaa33, #ff8800);
 }
 
 /* 作り方ステップ */
 .step {
-  background: #fff7f2;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  border-left: 4px solid #ff7043;
+  background: #fff;
+  padding: 18px 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border-left: 5px solid #ff7043;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  border: 1px solid #f5f5f5;
+  border-left-width: 5px;
+  line-height: 1.7;
 }
 
-/* スマホ対応 */
-@media (max-width: 700px) {
-  .ingredients-wrapper {
-    flex-direction: column;
-  }
-  .photo-card img {
-    height: 200px;
-  }
+@media (max-width: 768px) {
+  .photo-card img { height: 280px; }
+  .header-title { font-size: 22px; }
+  .recipe-card { padding: 20px; }
 }
 </style>
-
 </head>
-
 <body>
 
 <header>
-    鶏ガラなしでも大丈夫！「鶏白湯ラーメン」
-    <a class="back-link" href="../index.html" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: white; text-decoration: none; font-size: 16px; background: rgba(255,255,255,0.2); padding: 8px 14px; border-radius: 8px;">トップページへ戻る</a>
+  <h1 class="header-title">鶏ガラなしでも大丈夫！「鶏白湯ラーメン」</h1>
+  <a class="back-link" href="../index.html">← トップページへ戻る</a>
 </header>
 
 <div class="container">
-
   <!-- 写真カード -->
   <div class="photo-card">
     <img src="img/toripaitan.jpg" alt="鶏ガラなしでも大丈夫！「鶏白湯ラーメン」">
@@ -151,28 +209,23 @@ ul {
   <!-- レシピカード -->
   <div class="recipe-card">
     <h2>材料（1人前）</h2>
-
     <div class="ingredients-wrapper">
       <div class="ingredients-block"><div class="ingredients-title">材料</div><ul><li>鶏もも肉：１２０g</li><li>昆布だしの素：小さじ１</li></ul></div>
     </div>
 
     <h2>作り方</h2>
-
     <div id="steps">
       <div class="step">1. 鶏もも肉を３㎝角に切る。</div><div class="step">2. 鍋に水７５０mlと切った鶏もも肉を入れ、沸騰するまで強火で沸かす。</div><div class="step">3. 沸騰したら弱火にして、蓋をし１時間煮る。</div>
     </div>
 
-    <h2>ちょい足し・おすすめの「しめ」レシピ</h2>
     <div id="addon">
-    
+      
         <div class="remarks-card" style="margin-top: 35px; background: #fffde6; border-left: 6px solid #fbc02d; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); text-align: left;">
             <h3 style="margin: 0 0 10px 0; font-size: 18px; color: #f57f17; display: flex; align-items: center; gap: 6px;">💡 ちょい足しメモ・備考</h3>
             <p style="margin: 0; font-size: 15px; color: #5d4037; line-height: 1.6; white-space: pre-wrap;">昆布だしを入れるのがポイント</p>
         </div>
     </div>
-
   </div>
-
 </div>
 
 </body>
