@@ -2,38 +2,332 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>鶏ベースメニュー一覧</title>
+<title>鶏ベースメニュー一覧 | 究極の家ラーメン再現専門</title>
 <style>
-body { font-family: "Hiragino Sans", "Meiryo", sans-serif; margin: 0; padding: 0; background: #fafafa; color: #333; }
-header { background: #ff7043; color: white; padding: 20px; font-size: 26px; font-weight: bold; position: relative; text-align: center; }
-.back-link { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: white; text-decoration: none; font-size: 18px; background: rgba(255,255,255,0.2); padding: 8px 14px; border-radius: 8px; }
-.back-link:hover { background: rgba(255,255,255,0.35); }
-.menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 20px; max-width: 1000px; margin: 0 auto; }
-.menu-item { background: white; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; text-align: center; transition: 0.2s; }
-.menu-item:hover { transform: translateY(-4px); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-.menu-item img { width: 100%; height: 150px; object-fit: cover; }
-.menu-item a { display: block; padding: 12px; font-size: 18px; color: #ff7043; text-decoration: none; font-weight: bold; }
-.menu-item a:hover { text-decoration: underline; }
-@media (max-width: 700px) { .menu-grid { grid-template-columns: repeat(1, 1fr); } }
+body {
+  font-family: "Hiragino Sans", "Meiryo", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fcf8f5; /* ほんのり温かみのある白砂スープ色 */
+  color: #333;
+}
+
+/* ★トップ＆個別ページと完全同期した、漆黒和モダンのプレミアムヘッダー */
+header {
+  position: relative;
+  background: linear-gradient(135deg, #140502 0%, #300c05 50%, #140502 100%);
+  padding: 50px 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  border-bottom: 4px solid #ff7043;
+  overflow: hidden;
+}
+
+/* 和紙のざらざらした上質な質感を演出 */
+header::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    radial-gradient(rgba(255, 112, 67, 0.12) 1px, transparent 0),
+    radial-gradient(rgba(255, 112, 67, 0.08) 1px, transparent 0);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
+  opacity: 0.4;
+  z-index: 1;
+}
+
+/* 湯気のような揺らぎエフェクト */
+header::after {
+  content: "";
+  position: absolute;
+  top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(255,112,67,0.06) 0%, transparent 60%);
+  z-index: 2;
+  animation: waveSteam 12s infinite alternate ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes waveSteam {
+  0% { transform: translate(-5%, -5%) rotate(0deg); }
+  100% { transform: translate(5%, 5%) rotate(10deg); }
+}
+
+.header-container {
+  position: relative;
+  z-index: 3;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 900;
+  margin: 0 0 15px 0;
+  letter-spacing: 3px;
+  text-shadow: 
+    0 2px 4px rgba(0,0,0,0.9),
+    0 0 15px rgba(255, 112, 67, 0.4);
+}
+
+/* お洒落な角丸ゴールドボーダーの「戻る」ボタン */
+.back-link {
+  display: inline-block;
+  color: #ffe2d1;
+  text-decoration: none;
+  font-size: 14px;
+  border: 1px solid rgba(255, 112, 67, 0.5);
+  padding: 8px 20px;
+  border-radius: 30px;
+  background: rgba(0,0,0,0.3);
+  transition: 0.2s;
+  letter-spacing: 1px;
+}
+.back-link:hover {
+  background: rgba(255, 112, 67, 0.3);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* ★新設：カテゴリ内『最高の一杯』をドドーンと出すための特大ヒーローカード */
+.subcategory-featured {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  border: 2px solid #ffe2d1;
+  margin-bottom: 45px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.subcategory-featured:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(255,112,67,0.12);
+}
+
+.feat-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 280px;
+}
+
+.feat-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.subcategory-featured:hover .feat-img {
+  transform: scale(1.08);
+}
+
+/* 一押しリボン */
+.feat-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: linear-gradient(135deg, #d32f2f, #ff7043);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  z-index: 2;
+}
+
+.feat-content {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.feat-tag {
+  color: #ff7043;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.feat-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #2c1a16;
+  line-height: 1.3;
+  margin: 0 0 10px 0;
+}
+
+.feat-desc {
+  font-size: 14px;
+  color: #66524e;
+  line-height: 1.6;
+  margin: 0 0 15px 0;
+}
+
+.feat-btn {
+  display: inline-block;
+  align-self: flex-start;
+  background: linear-gradient(135deg, #d32f2f, #ff7043);
+  color: white;
+  text-decoration: none;
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(211,47,47,0.2);
+  transition: 0.2s;
+}
+
+.feat-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(211,47,47,0.35);
+}
+
+/* スープ系統ごとのメニュー見出し */
+.subcategory-badge {
+  display: inline-block;
+  border-left: 5px solid #ff7043;
+  padding-left: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #2c1a16;
+  margin-bottom: 25px;
+}
+
+/* 高級和モダン・レシピ目次ギャラリー */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.menu-item {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+  border: 2px solid #ffe2d1;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item:hover {
+  transform: translateY(-6px);
+  border-color: #ff7043;
+  box-shadow: 0 12px 30px rgba(255, 112, 67, 0.15);
+}
+
+.menu-item-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.menu-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.menu-item:hover img {
+  transform: scale(1.08);
+}
+
+.menu-item a {
+  display: block;
+  padding: 20px;
+  font-size: 18px;
+  color: #2c1a16;
+  text-decoration: none;
+  font-weight: bold;
+  line-height: 1.4;
+  text-align: left;
+  flex-grow: 1;
+  transition: color 0.2s;
+}
+
+.menu-item:hover a {
+  color: #d32f2f;
+}
+
+@media (max-width: 768px) {
+  .subcategory-featured {
+    grid-template-columns: 1fr;
+    margin-bottom: 30px;
+  }
+  .feat-img-wrapper {
+    height: 200px;
+  }
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  .title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
 </head>
 <body>
 
 <header>
-<div class="title">鶏ベースメニュー一覧</div>
-<a class="back-link" href="../index.html">トップページへ戻る</a>
+  <div class="header-container">
+    <div class="title">鶏ベース 一覧</div>
+    <a class="back-link" href="../index.html">← トップページへ戻る</a>
+  </div>
 </header>
 
-<div class="menu-grid">
-<div class="menu-item">
-  <img src="../recipes/img/toripaitan.jpg" alt="鶏ガラなしでも大丈夫！「鶏白湯ラーメン」" onerror="this.src='../placeholder.jpg';">
-  <a href="../recipes/toripaitan.html">鶏ガラなしでも大丈夫！「鶏白湯ラーメン」</a>
-</div>
-<div class="menu-item">
-  <img src="../recipes/img/tenichi.jpg" alt="【スーパーの食材で完全再現】ブレンダーと「餅」で作る超濃厚こってりラーメン" onerror="this.src='../placeholder.jpg';">
-  <a href="../recipes/tenichi.html">【スーパーの食材で完全再現】ブレンダーと「餅」で作る超濃厚こってりラーメン</a>
-</div>
+<div class="container">
+  <!-- ★新設：このカテゴリの絶対的な一押しキラーレシピをここに自動出力 -->
+  
+            <div class="subcategory-featured">
+              <div class="feat-img-wrapper">
+                <span class="feat-badge">まずはこれを作れ！一押しレシピ</span>
+                <img src="../recipes/img/tenichi.jpg" alt="【スーパーの食材で完全再現】ブレンダーと「餅」で作る超濃厚こってりラーメン" class="feat-img" onerror="this.src='../recipes/img/tonkotsu.jpg';">
+              </div>
+              <div class="feat-content">
+                <span class="feat-tag">★ 特選再現</span>
+                <h2 class="feat-title">【スーパーの食材で完全再現】ブレンダーと「餅」で作る超濃厚こってりラーメン</h2>
+                <p class="feat-desc">スーパーの食材と餅だけで、あの天下一品の味を完全再現した奇跡のレシピ。ブレンダーで乳化させたドロドロスープの秘密を大公開！</p>
+                <a href="../recipes/tenichi.html" class="feat-btn">この再現レシピを作る →</a>
+              </div>
+            </div>
 
+  <div class="subcategory-badge">その他の再現レシピ</div>
+  <div class="menu-grid">
+    
+            <div class="menu-item">
+              <div class="menu-item-img-wrapper">
+                <img src="../recipes/img/tenichi.jpg" alt="【スーパーの食材で完全再現】ブレンダーと「餅」で作る超濃厚こってりラーメン" onerror="this.src='../recipes/img/tonkotsu.jpg';">
+              </div>
+              <a href="../recipes/tenichi.html">【スーパーの食材で完全再現】ブレンダーと「餅」で作る超濃厚こってりラーメン</a>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-img-wrapper">
+                <img src="../recipes/img/toripaitan.jpg" alt="鶏ガラなしでも大丈夫！「鶏白湯ラーメン」" onerror="this.src='../recipes/img/tonkotsu.jpg';">
+              </div>
+              <a href="../recipes/toripaitan.html">鶏ガラなしでも大丈夫！「鶏白湯ラーメン」</a>
+            </div>
+  </div>
 </div>
 
 </body>
