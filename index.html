@@ -12,46 +12,58 @@ body {
   padding: 0;
 }
 
-/* ★名店の佇まいを感じさせるプレミアムヘッダーCSS（暖簾なし・完全差し戻し版） */
+/* ★トップページヘッダー：漆黒和モダン×職人のシズル風景 */
 .premium-header {
   position: relative;
-  /* 漆黒から極暗赤色（醤油・スープの深み）へと沈む高級なグラデーション */
-  background: linear-gradient(135deg, #140502 0%, #300c05 50%, #140502 100%);
-  padding: 65px 20px;
+  /* 醤油やスープの深みを想起させる、極暗赤色から漆黒へのグラデーション */
+  background: linear-gradient(135deg, #100301 0%, #2a0a04 50%, #100301 100%);
+  padding: 60px 20px;
   text-align: center;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  /* どんぶりの縁の朱塗りをイメージしたアンダーライン */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   border-bottom: 4px solid #ff7043;
+  overflow: hidden;
 }
 
-/* ★テクスチャ効果：CSSだけで「上質な和紙」のようなかすれた質感を演出し、デジタルチープさを完全排除 */
+/* ★職人のラーメン作り風景を、トップページに絶妙な極薄さで溶け込ませる */
 .premium-header::before {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-image: 
-    radial-gradient(rgba(255, 112, 67, 0.12) 1px, transparent 0),
-    radial-gradient(rgba(255, 112, 67, 0.08) 1px, transparent 0);
-  background-size: 8px 8px;
-  background-position: 0 0, 4px 4px;
-  opacity: 0.4;
+  
+  /* 画像パスはあなたの設定した通り完璧です！ */
+  background-image: url('recipes/img/header_kitchen_bg.jpg'); 
+  background-size: cover;
+  background-position: center 30%;
+  
+  /* ★過剰な暗黒設定をすべて解除！白黒化しつつ、自然な明るさで透かします */
+  filter: grayscale(100%) brightness(80%) contrast(120%);
+  opacity: 0.25; /* ブレンドモードを使わず、シンプルに25%の薄さで重ねるのが一番綺麗です */
+  
   z-index: 1;
+  pointer-events: none;
 }
 
-/* ★アニメーション：スープの「湯気」や「熱気」を想起させる、光の揺らぎエフェクトを裏側に仕込む */
+/* スープの熱気・湯気を演出するライトエフェクト */
 .premium-header::after {
   content: "";
   position: absolute;
   top: -50%; left: -50%; width: 200%; height: 200%;
-  background: radial-gradient(circle, rgba(255,112,67,0.06) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(255, 112, 67, 0.05) 0%, transparent 60%);
   z-index: 2;
-  animation: waveSteam 12s infinite alternate ease-in-out;
+  animation: waveSteam 15s infinite alternate ease-in-out;
+  pointer-events: none;
 }
 
+/* 湯気の揺らぎアニメーション */
 @keyframes waveSteam {
   0% { transform: translate(-5%, -5%) rotate(0deg); }
-  100% { transform: translate(5%, 5%) rotate(10deg); }
+  100% { transform: translate(5%, 5%) rotate(8deg); }
+}
+
+/* ヘッダー内の文字グループ（背景より上に配置） */
+.header-container {
+  position: relative;
+  z-index: 3;
 }
 
 .header-container {
@@ -66,7 +78,7 @@ body {
   display: inline-block;
   background: #ff7043;
   color: #140502;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 900;
   text-transform: uppercase;
   padding: 5px 15px;
@@ -372,29 +384,28 @@ body {
   }
 }
 
-/* ★背景画像付きカテゴリカードの極上お洒落エフェクト（文字下部固定版） */
+/* ==========================================
+   ★完全リニューアル：常時シズル感爆発カテゴリーカード
+   ========================================== */
+
 .category-card.has-bg {
   position: relative;
   overflow: hidden;
-  background-color: #7c7978; /* 暗めの土台を敷く */
+  background-color: #100301; /* 暗めのベースを漆黒にして写真を引き締める */
   border: 2px solid #ff7043;
   border-radius: 16px;
-  
-  /* カードの高さを固定して、綺麗な比率のギャラリー風にします */
-  height: 200px; 
+  height: 200px;
   box-sizing: border-box;
-  
-  /* ★文字を確実に下部に配置するためのFlex制御 */
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* 子要素（文字）を下端に寄せる */
+  justify-content: flex-end; /* 文字を下部に固定 */
   align-items: center;
-  padding: 0 15px 20px 15px; /* 下部に適度な余白（20px）を空けて美しく配置 */
+  padding: 0 15px 20px 15px;
   text-decoration: none;
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
-/* 背景写真の初期状態（文字を読みやすくするため通常時は30%の薄さで透かす） */
+/* ★改善点①：背景写真の初期状態（白黒化を撤廃し、最初から75%の鮮やかさで表示！） */
 .category-card.has-bg::before {
   content: "";
   position: absolute;
@@ -405,23 +416,57 @@ body {
   background-image: var(--bg-img);
   background-size: cover;
   background-position: center;
-  opacity: 0.35; 
-  filter: grayscale(10%) brightness(85%); 
+  opacity: 0.75; /* ★ 0.35から0.75へ劇的引き上げ。最初から具材やスープが鮮明に見えます */
+  filter: grayscale(0%) brightness(90%); /* ★ 不味そうに見える白黒化(grayscale)を完全撤廃！ */
   transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s, filter 0.4s;
   z-index: 1;
 }
 
-/* ★ホバーした瞬間に写真が鮮明に浮かび上がりズームインする演出 */
+/* ★改善点②：写真が明るくなった分、上に乗る「文字」を絶対に読ませるためのグラデーションマスクを追加 */
+.category-card.has-bg::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 55%; /* 下部55%に上品な黒グラデーションを敷く */
+  background: linear-gradient(to top, rgba(16, 3, 1, 0.9) 0%, rgba(16, 3, 1, 0) 100%);
+  z-index: 2; /* 写真(1)の上、文字(3)の下に滑り込ませる */
+  pointer-events: none;
+}
+
+/* ホバー時の挙動（PCのみ、フワッとさらに明るくズームインする高級感） */
 .category-card.has-bg:hover {
   transform: translateY(-8px);
-  border-color: #ff7043;
-  box-shadow: 0 15px 30px rgba(211, 47, 47, 0.25);
+  border-color: #ffaa66;
+  box-shadow: 0 15px 30px rgba(255, 112, 67, 0.3);
 }
 
 .category-card.has-bg:hover::before {
-  opacity: 0.8; /* マウスを載せたら写真が80%までクッキリ浮かび上がる */
-  filter: grayscale(0%) brightness(95%); 
-  transform: scale(1.12); /* 写真が奥からフワッと12%大きく迫ってくる */
+  opacity: 0.95; /* ホバー時はほぼ100%に近い鮮明度へ */
+  transform: scale(1.08); /* ズーム率を12%→8%に抑え、上品に料理をアピール */
+}
+
+/* ★改善点③：文字セレクタを「span」に正確に変更し、確実に黒グラデの上に浮き立たせる */
+.category-card.has-bg span {
+  position: relative;
+  z-index: 3; /* ★ 写真(1)やマスク(2)を貫通して最前面に立たせる */
+  color: #ffffff !important;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  width: 100%;
+  text-align: center;
+  /* 白いスープ画像と重なっても文字が絶対にボヤけない、漆黒の立体シャドウ */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+/* ★改善点④：【最重要】スマホなど、ホバーが存在しない端末での防衛策 */
+@media (hover: none) {
+  .category-card.has-bg::before {
+    opacity: 0.85; /* ★ スマホでは最初から「85%の最強シズル感」で写真を固定表示！ */
+    filter: grayscale(0%) brightness(95%);
+  }
 }
 
 /* ★下部に沈めた文字のスタイリング（どんな写真が来ても絶対に読める設計） */
@@ -448,13 +493,6 @@ body {
     <div class="brand-badge">究極の家ラーメン再現専門</div>
     
     <h1 class="header-main">極旨ラーメン レシピブログ</h1>
-    
-    <!-- タイトルの威厳を引き締める和モダンな装飾線 -->
-    <div class="header-decorator">
-      <span class="line"></span>
-      <span class="icon">🍜</span>
-      <span class="line"></span>
-    </div>
     
     <p class="header-sub">【スーパーの食材だけ】ブレンダーと裏技で、あの名店の味を自宅で完全再現！</p>
   </div>

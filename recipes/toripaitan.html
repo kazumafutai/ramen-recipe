@@ -32,7 +32,7 @@ header::before {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-image: 
+  background-image:
     radial-gradient(rgba(255, 112, 67, 0.12) 1px, transparent 0),
     radial-gradient(rgba(255, 112, 67, 0.08) 1px, transparent 0);
   background-size: 8px 8px;
@@ -40,6 +40,7 @@ header::before {
   opacity: 0.4;
   z-index: 1;
 }
+
 .header-title {
   position: relative;
   z-index: 3;
@@ -50,6 +51,7 @@ header::before {
   letter-spacing: 2px;
   text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 0 15px rgba(255, 112, 67, 0.4);
 }
+
 .back-link {
   position: relative;
   z-index: 3;
@@ -63,6 +65,7 @@ header::before {
   background: rgba(0,0,0,0.3);
   transition: 0.2s;
 }
+
 .back-link:hover {
   background: rgba(255, 112, 67, 0.3);
   color: white;
@@ -83,11 +86,13 @@ header::before {
   margin-bottom: 40px;
   border: 2px solid #ffe2d1;
 }
+
 .photo-card img {
   width: 100%;
   height: 450px; /* シズル感を爆発させるために高さを大幅に拡大 */
   object-fit: cover;
 }
+
 .photo-card .caption {
   padding: 20px;
   font-size: 16px;
@@ -105,6 +110,7 @@ header::before {
   box-shadow: 0 8px 25px rgba(0,0,0,0.05);
   margin-bottom: 40px;
 }
+
 .recipe-card h2 {
   margin-top: 0;
   border-left: 6px solid #ff7043;
@@ -121,6 +127,7 @@ header::before {
   margin-top: 20px;
   margin-bottom: 40px;
 }
+
 .ingredients-block {
   background: #fffaf7;
   padding: 20px;
@@ -129,6 +136,7 @@ header::before {
   flex: 1;
   min-width: 250px;
 }
+
 .ingredients-title {
   font-weight: bold;
   font-size: 18px;
@@ -137,39 +145,130 @@ header::before {
   border-bottom: 2px solid #ff7043;
   padding-bottom: 8px;
 }
+
 .ingredients-block ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
+
+/* ★追加のプロ技：材料リストの右端にボタンをピシッと整列させる */
 .ingredients-block li {
-  padding: 10px 0;
+  padding: 12px 0;
   border-bottom: 1px dashed #ffcca8;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* 両端に引き離す */
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
 }
 
-/* ★最強のキャッシュポイント「アフィリエイト購入ボタン」 */
-.shop-link {
-  display: inline-block;
-  background: linear-gradient(180deg, #ff9900, #ff7b00); /* Amazonや楽天を想起させる購買欲直結オレンジ */
-  color: white !important;
-  text-decoration: none;
-  font-size: 12px;
+.ingredients-block li span:first-child {
   font-weight: bold;
-  padding: 6px 14px;
-  border-radius: 6px;
-  box-shadow: 0 3px 8px rgba(255, 123, 0, 0.3);
-  transition: 0.2s;
+  color: #2c1a16;
+  flex-grow: 1; /* 材料名を左端に固定 */
+}
+
+.ingredients-block li .amount {
+  color: #d32f2f;
+  font-weight: bold;
+  margin-left: auto; /* 確実に右端へピシッと整列させる指定 */
+  text-align: right;
   white-space: nowrap;
 }
+
+/* 材料名と購入ボタンを縦にズラさず、綺麗に横並びにするインラインフレックス設定 */
+.ingredients-block li span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* 材料名とアフィリエイトボタンの間の程よい距離 */
+}
+
+/* ★進化した、視線を強制的にハックする「魔力のアフィリエイトボタン」 */
+.shop-link {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff9900 0%, #ff5d00 100%); /* より燃えるような鮮やかなグラデーションに変更 */
+  color: white !important;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 900; /* 文字をさらに極太に */
+  padding: 6px 14px;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(255, 93, 0, 0.35);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden; /* 光のエフェクトをボタン内に収めるために必須 */
+  
+  /* ★仕掛け①：2秒に1回、フワッと拍動して読者に存在を主張し続ける */
+  animation: pulseButton 2s infinite ease-in-out;
+}
+
+/* ★天才的アイデア：アフィリエイト付きの材料名の極上装飾 */
+/* ★決定版：詳細度の競合をねじ伏せ、100%確実にオレンジにするための指定 */
+.ingredients-wrapper .ingredients-block li span a.ing-link,
+.ingredients-block li span a.ing-link,
+.ing-link {
+  color: #ff5d00 !important; /* ボタンと同じ、購買欲をそそるブランドオレンジ */
+  text-decoration: underline !important; /* リンクであることを直感的に伝える上品な下線 */
+  font-weight: bold !important;
+  transition: color 0.2s ease;
+}
+
+/* ホバー（タップ）した際に、お肉のような上品な深赤にフワッと変化 */
+.ingredients-wrapper .ingredients-block li span a.ing-link:hover,
+.ingredients-block li span a.ing-link:hover,
+.ing-link:hover {
+  color: #d32f2f !important;
+  text-decoration: none !important; /* ホバー時は下線を消して動きを演出 */
+}
+
+/* ★仕掛け②：ボタンの表面を「斜めの光のライン」が3.5秒ごとにキラリと走り抜ける（シズル感演出） */
+.shop-link::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -70%;
+  width: 30%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.6) 50%,
+    rgba(255,255,255,0) 100% /* ★ 100__ から「100%」に完全修正！ */
+  );
+  transform: rotate(25deg);
+  animation: shine 3.5s infinite ease-in-out;
+}
+
+/* ホバー時の挙動をよりリッチに */
 .shop-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(255, 123, 0, 0.4);
-  background: linear-gradient(180deg, #ffaa33, #ff8800);
+  transform: translateY(-3px) scale(1.05); /* 触るとフワッと浮き上がって拡大 */
+  box-shadow: 0 8px 20px rgba(255, 93, 0, 0.5);
+  background: linear-gradient(135deg, #ffa834 0%, #ff7700 100%);
+}
+
+/* 拍動アニメーションの定義 */
+@keyframes pulseButton {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 10px rgba(255, 93, 0, 0.35);
+  }
+  50% {
+    transform: scale(1.04); /* わずかに膨らむ */
+    box-shadow: 0 6px 18px rgba(255, 93, 0, 0.6); /* 影がジュワッと広がる */
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 10px rgba(255, 93, 0, 0.35);
+  }
+}
+
+/* 光るエフェクトアニメーションの定義 */
+@keyframes shine {
+  0% { left: -70%; }
+  15% { left: 120%; } /* 一瞬でボタンを通り抜ける */
+  100% { left: 120%; } /* しばらく待機 */
 }
 
 /* 作り方ステップ */

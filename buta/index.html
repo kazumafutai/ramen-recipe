@@ -263,6 +263,28 @@ header::after {
   color: #d32f2f;
 }
 
+/* ★追加：写真リンクを美しく演出し、クリック（タップ）を誘発させるスタイル */
+.feat-img-link,
+.menu-item-img-link {
+  display: block;
+  text-decoration: none;
+  overflow: hidden; /* 画像のはみ出しを防ぐ */
+  cursor: pointer;
+}
+
+/* 通常時の画像に滑らかなアニメーションを設定 */
+.feat-img,
+.menu-item-img-wrapper img {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), filter 0.3s ease;
+}
+
+/* マウスホバー・タップ時に、写真が上品に拡大（ズーム）しつつ、わずかに明るく輝く演出 */
+.feat-img-link:hover .feat-img,
+.menu-item-img-link:hover .menu-item-img-wrapper img {
+  transform: scale(1.05); /* 5%拡大 */
+  filter: brightness(110%); /* 10%明るく */
+}
+
 @media (max-width: 768px) {
   .subcategory-featured {
     grid-template-columns: 1fr;
@@ -299,14 +321,23 @@ header::after {
 <div class="container">
   <!-- ★新設：このカテゴリの絶対的な一押しキラーレシピをここに自動出力 -->
   
+
             <div class="subcategory-featured">
+
+            <!-- ★写真全体をaタグで包み、クリック可能に改修 -->
+            <a href="../recipes/tenichi.html" class="feat-img-link">
               <div class="feat-img-wrapper">
-                <span class="feat-badge">まずはこれを作れ！一押しレシピ</span>
-                <img src="../recipes/img/tenichi.jpg" alt="【スーパーの食材で完全再現】ブレンダーと「餅」で作る超濃厚こってりラーメン" class="feat-img" onerror="this.src='../recipes/img/tonkotsu.jpg';">
+
+              <span class="feat-badge">まずはこれを作れ！一押しレシピ</span>
+
+              <img src="../recipes/img/tenichi.jpg" alt="「餅」が決め手。天下一品風の濃厚こってりラーメン" class="feat-img" onerror="this.src='../recipes/img/tonkotsu.jpg';">
+
               </div>
-              <div class="feat-content">
+            </a>
+
+            <div class="feat-content">
                 <span class="feat-tag">★ 特選再現</span>
-                <h2 class="feat-title">【スーパーの食材で完全再現】ブレンダーと「餅」で作る超濃厚こってりラーメン</h2>
+                <h2 class="feat-title">「餅」が決め手。天下一品風の濃厚こってりラーメン</h2>
                 <p class="feat-desc">スーパーの食材と餅だけで、あの天下一品の味を完全再現した奇跡のレシピ。ブレンダーで乳化させたドロドロスープの秘密を大公開！</p>
                 <a href="../recipes/tenichi.html" class="feat-btn">この再現レシピを作る →</a>
               </div>
@@ -315,11 +346,19 @@ header::after {
   <div class="subcategory-badge">その他の再現レシピ</div>
   <div class="menu-grid">
     
+
             <div class="menu-item">
-              <div class="menu-item-img-wrapper">
-                <img src="../recipes/img/tenichi.jpg" alt="【スーパーの食材で完全再現】ブレンダーと「餅」で作る超濃厚こってりラーメン" onerror="this.src='../recipes/img/tonkotsu.jpg';">
-              </div>
-              <a href="../recipes/tenichi.html">【スーパーの食材で完全再現】ブレンダーと「餅」で作る超濃厚こってりラーメン</a>
+
+            <!-- ★写真全体をaタグで包み、リンク領域を拡大 -->
+            <a href="../recipes/tenichi.html" class="menu-item-img-link">
+                <div class="menu-item-img-wrapper">
+
+                <img src="../recipes/img/tenichi.jpg" alt="「餅」が決め手。天下一品風の濃厚こってりラーメン" onerror="this.src='../recipes/img/tonkotsu.jpg';">
+
+                </div>
+            </a>
+
+            <a href="../recipes/tenichi.html">「餅」が決め手。天下一品風の濃厚こってりラーメン</a>
             </div>
   </div>
 </div>
