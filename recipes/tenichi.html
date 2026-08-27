@@ -170,11 +170,14 @@ header::before {
 }
 
 .ingredients-block li .amount {
-  color: #d32f2f;
-  font-weight: bold;
-  margin-left: auto; /* 確実に右端へピシッと整列させる指定 */
-  text-align: right;
-  white-space: nowrap;
+color: #d32f2f;
+font-weight: bold;
+margin-left: auto; /* 確実に右端へピシッと整列させる指定 */
+text-align: right;
+/* ★はみ出し対策：短い時は1行で右寄せ、長文が入った時のみ枠内で綺麗に折り返す設計 */
+white-space: normal; /* 折り返しを許可 */
+word-break: break-all; /* 単語の途中でも枠に合わせて改行 */
+max-width: 100%; /* コンテナ幅（100%）を決して超えないようにガード */
 }
 
 /* 材料名と購入ボタンを縦にズラさず、綺麗に横並びにするインラインフレックス設定 */
@@ -309,7 +312,7 @@ header::before {
   <div class="recipe-card">
     <h2>材料（2人前）</h2>
     <div class="ingredients-wrapper">
-      <div class="ingredients-block"><div class="ingredients-title">スープの具材（煮込み用）</div><ul><li><span>鶏もも肉</span><span class="amount">250g</span></li><li><span>豚バラブロック</span><span class="amount">300g (チャーシュー兼用)</span></li><li><span>切り餅</span><span class="amount">1枚（とろみと乳化の秘密兵器！）</span></li><li><span>玉ねぎ</span><span class="amount">1/2個</span></li><li><span>じゃがいも</span><span class="amount">1個</span></li><li><span>人参</span><span class="amount">1/3本</span></li><li><span>にんにく</span><span class="amount">2片</span></li><li><span>生姜</span><span class="amount">1片</span></li><li><span>水</span><span class="amount">1000ml</span></li></ul></div><div class="ingredients-block"><div class="ingredients-title">スープの調味料（タレ・かえし）</div><ul><li><span>醤油</span><span class="amount">大さじ4</span></li><li><span>みりん</span><span class="amount">大さじ2</span></li><li><span>砂糖</span><span class="amount">小さじ1</span></li><li><span><a href="https://amzn.to/3ZZZZZZ" class="ing-link" target="_blank" rel="noopener">鶏がらスープの素</a> <a href="https://amzn.to/3ZZZZZZ" class="shop-link" target="_blank" rel="noopener">ネットで買う</a></span><span class="amount">大さじ1.5</span></li><li><span>昆布だしの素</span><span class="amount">小さじ1</span></li><li><span>塩</span><span class="amount">小さじ1/2</span></li></ul></div><div class="ingredients-block"><div class="ingredients-title">麺・トッピング</div><ul><li><span>中華麺（中細ストレート）</span><span class="amount">2玉</span></li><li><span>チャーシュー</span><span class="amount">煮込んだ豚バラ肉（スライス）</span></li><li><span>青ネギ（刻み）</span><span class="amount">たっぷり</span></li><li><span>メンマ</span><span class="amount">お好みで</span></li></ul></div>
+      <div class="ingredients-block"><div class="ingredients-title">スープの具材（煮込み用）</div><ul><li><span>鶏もも肉</span><span class="amount">250g</span></li><li><span>豚バラブロック</span><span class="amount">300g (チャーシュー兼用)</span></li><li><span>切り餅（こってりの秘密兵器）</span><span class="amount">1枚</span></li><li><span>玉ねぎ</span><span class="amount">1/2個</span></li><li><span>じゃがいも</span><span class="amount">1個</span></li><li><span>人参</span><span class="amount">1/3本</span></li><li><span>にんにく</span><span class="amount">2片</span></li><li><span>生姜</span><span class="amount">1片</span></li><li><span>水</span><span class="amount">1000ml</span></li></ul></div><div class="ingredients-block"><div class="ingredients-title">スープの調味料（タレ・かえし）</div><ul><li><span>醤油</span><span class="amount">大さじ4</span></li><li><span>みりん</span><span class="amount">大さじ2</span></li><li><span>砂糖</span><span class="amount">小さじ1</span></li><li><span><a href="https://amzn.to/3ZZZZZZ" class="ing-link" target="_blank" rel="noopener">鶏がらスープの素</a> <a href="https://amzn.to/3ZZZZZZ" class="shop-link" target="_blank" rel="noopener">ネットで買う</a></span><span class="amount">大さじ1.5</span></li><li><span>昆布だしの素</span><span class="amount">小さじ1</span></li><li><span>塩</span><span class="amount">小さじ1/2</span></li></ul></div><div class="ingredients-block"><div class="ingredients-title">麺・トッピング</div><ul><li><span>中華麺（中細ストレート）</span><span class="amount">2玉</span></li><li><span>チャーシュー</span><span class="amount">煮込んだ豚バラ肉（スライス）</span></li><li><span>青ネギ（刻み）</span><span class="amount">たっぷり</span></li><li><span>メンマ</span><span class="amount">お好みで</span></li></ul></div>
     </div>
 
     <h2>作り方</h2>

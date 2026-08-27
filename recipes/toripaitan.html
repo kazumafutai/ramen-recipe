@@ -170,11 +170,14 @@ header::before {
 }
 
 .ingredients-block li .amount {
-  color: #d32f2f;
-  font-weight: bold;
-  margin-left: auto; /* 確実に右端へピシッと整列させる指定 */
-  text-align: right;
-  white-space: nowrap;
+color: #d32f2f;
+font-weight: bold;
+margin-left: auto; /* 確実に右端へピシッと整列させる指定 */
+text-align: right;
+/* ★はみ出し対策：短い時は1行で右寄せ、長文が入った時のみ枠内で綺麗に折り返す設計 */
+white-space: normal; /* 折り返しを許可 */
+word-break: break-all; /* 単語の途中でも枠に合わせて改行 */
+max-width: 100%; /* コンテナ幅（100%）を決して超えないようにガード */
 }
 
 /* 材料名と購入ボタンを縦にズラさず、綺麗に横並びにするインラインフレックス設定 */
