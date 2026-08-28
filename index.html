@@ -366,22 +366,36 @@ body {
 
 /* ★レスポンシブ表示（スマホ対応）の強化 */
 @media (max-width: 768px) {
-  .category-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .header-main {
-    font-size: 28px; /* スマホ画面でタイトルがはみ出さないサイズに調整 */
-  }
-  .header-sub {
-    font-size: 13px; /* コンセプトコピーをスマホの1行（または2行）に美しく収める */
-    padding: 6px 12px;
-    line-height: 1.4;
-  }
+	.category-grid {
+		grid-template-columns: repeat(2, 1fr); /* スマホは2列で一覧性をキープ */
+		gap: 12px; /* ★隙間を限界まで詰めて、カード自体のタップ面積を広げる */
+	}
+	.category-card.has-bg {
+		height: 150px !important; /* ★スマホ画面の比率に合わせた黄金バランスの高さ */
+		padding: 0 10px 15px 10px !important;
+	}
+	.category-card.has-bg span {
+		font-size: 20px !important; /* ★スマホでも文字がハッキリ読めるようにサイズを強制キープ */
+		letter-spacing: 1px !important;
+		line-height: 1.3 !important;
+	}
+	.header-main {
+		font-size: 28px; /* スマホ画面でタイトルがはみ出さないサイズに調整 */
+	}
+	.header-sub {
+		font-size: 13px; /* コンセプトコピーをスマホの1行（または2行）に美しく収める */
+		padding: 6px 12px;
+		line-height: 1.4;
+	}
 }
-@media (max-width: 480px) {
-  .category-grid {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 380px) {
+	/* 画面がかなり狭い小型スマホの場合のみ1列化して見やすさを担保 */
+	.category-grid {
+		grid-template-columns: 1fr;
+	}
+	.category-card.has-bg {
+		height: 130px !important;
+	}
 }
 
 /* ==========================================
